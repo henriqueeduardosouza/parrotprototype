@@ -11,6 +11,7 @@ namespace Parrot.Models {
         string Id { get; set; }
         string Email { get; set; }
         string Password { get; set; }
+        string NativeLanguage { get; set; }
         List<string> Friends { get; set; }
         public User(string name, string id, string email, string password, List<string> friends) {
             Name = name;
@@ -23,5 +24,6 @@ namespace Parrot.Models {
             Console.WriteLine($"User id:{Id}\n User name: {Name}\n User email: {Email}\n User password: {Password}\n");
             Console.WriteLine($"{Friends}");
         }
+
     }
 }
