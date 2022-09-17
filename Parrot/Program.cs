@@ -1,5 +1,6 @@
 ﻿using System;
 using Parrot.ViewActivity;
+using Parrot.Models;
 namespace MyApp // Note: actual namespace depends on the project name.
 {
     internal class Program
@@ -8,6 +9,8 @@ namespace MyApp // Note: actual namespace depends on the project name.
         {
             bool end = false;
             string option = "";
+            List<User> users = new List<User>();
+            int userId = 0;
 
             while (!end) 
             {
@@ -44,11 +47,15 @@ namespace MyApp // Note: actual namespace depends on the project name.
                     string username = Console.ReadLine();
                     Console.WriteLine("Type your native Language: ");
                     string language = Console.ReadLine();
+                    Console.WriteLine("Type the email: ");
+                    string email = Console.ReadLine();
                     Console.WriteLine("Type the password: ");
                     string password = Console.ReadLine();
-
+                    User user = new User(username, userId++,language,email,password);
+                    users.Add(user);
 
                     // Chama funcao de registrar
+                    View.ViewUsers(users);
                     Console.WriteLine("\nUsername registered with sucess\n");
                 }
                 else
