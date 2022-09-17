@@ -6,13 +6,16 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Parrot.Models {
-    public abstract class User {
+    public class User {
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
         public string NativeLanguage { get; set; }
         public List<string> Friends { get; set; }
+        
+        public User() {
+        }
         public User(string name, Guid id, string email, string password, List<string> friends) {
             Name = name;
             Id = id;
