@@ -1,5 +1,5 @@
 ﻿using System;
-
+using Parrot.ViewActivity;
 namespace MyApp // Note: actual namespace depends on the project name.
 {
     internal class Program
@@ -12,6 +12,26 @@ namespace MyApp // Note: actual namespace depends on the project name.
             while (!end) 
             {
                 Console.WriteLine("Welcome to Parrot");
+                Console.WriteLine("            .------.\r\n" +
+                    "           /  ~ ~   \\,------.      ______\r\n" +
+                    "         ,'  ~ ~ ~  /  (@)   \\   ,'      \\\r\n" +
+                    "       ,'          /`.    ~ ~ \\ /         \\\r\n" +
+                    "     ,'           | ,'\\  ~ ~ ~ X     \\  \\  \\\r\n" +
+                    "   ,'  ,'          V--<       (       \\  \\  \\\r\n" +
+                    " ,'  ,'               (vv      \\/\\  \\  \\  |  |\r\n" +
+                    "(__,'  ,'   /         (vv   \"\"    \\  \\  | |  |\r\n" +
+                    "  (__,'    /   /       vv   \"\"\"    \\ |  / / /\r\n" +
+                    "      \\__,'   /  |     vv          / / / / /\r\n" +
+                    "          \\__/   / |  | \\         / /,',','\r\n" +
+                    "             \\__/\\_^  |  \\       /,'',','\\\r\n" +
+                    "                    `-^.__>.____/  ' ,'   \\\r\n" +
+                    "                            // //---'      |\r\n" +
+                    "          ===============(((((((=================\r\n" +
+                    "                                     | \\ \\  \\\r\n" +
+                    "                                     / |  |  \\\r\n" +
+                    "                                    / /  / \\  \\\r\n" +
+                    "                                    `.     |   \\\r\n" +
+                    "                                      `--------'");
                 Console.WriteLine("Type an option:");
                 Console.WriteLine("\t1 - Register");
                 Console.WriteLine("\t0 - Quit");
