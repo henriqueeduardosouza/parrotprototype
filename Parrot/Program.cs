@@ -51,7 +51,7 @@ namespace MyApp // Note: actual namespace depends on the project name.
                     string email = Console.ReadLine();
                     Console.WriteLine("Type the password: ");
                     string password = Console.ReadLine();
-                    User user = new User(username, userId++,language,email,password);
+                    User user = new User(username,language,email,password);
                     users.Add(user);
 
                     // Chama funcao de registrar

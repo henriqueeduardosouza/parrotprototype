@@ -18,11 +18,11 @@ public class UserRepository : IUser
             List<User> users = new List<User>();
             while (rdr.Read())
             {
-                User user = new User();
-                user.Id = Guid.Parse(rdr["UserID"].ToString());
-                user.Name = rdr["UserName"].ToString();
-                user.Email = rdr["UserEmail"].ToString();
-                user.Password = rdr["UserPassword"].ToString();
+                string name = rdr["UserName"].ToString();
+                string email = rdr["UserEmail"].ToString();
+                string password = rdr["UserPassword"].ToString();
+                string nativeLanguage = rdr["UserNativeLanguage"].ToString();
+                User user = new User(name, nativeLanguage, email, password);
                 users.Add(user);
             }
             return users;
@@ -34,14 +34,14 @@ public class UserRepository : IUser
     {
         using(SqlConnection con = new SqlConnection(databaseConnection))
         {
-            string queryInsert = "INSERT INTO UserList (UserID, UserName, UserPassword, UserEmail) VALUES (@UserID, @UserName, @UserPassword, @UserEmail)";
+            string queryInsert = "INSERT INTO UserList (UserName, UserPassword, UserEmail, UserNativeLanguage) VALUES (@UserName, @UserPassword, @UserEmail, @UserNativeLanguage)";
             
             using (SqlCommand cmd = new(queryInsert, con))
                 {
-                    cmd.Parameters.AddWithValue("@UserID", user.Id);
                     cmd.Parameters.AddWithValue("@UserName", user.Name);
                     cmd.Parameters.AddWithValue("@UserPassword", user.Password);
                     cmd.Parameters.AddWithValue("@UserEmail", user.Email);
+                    cmd.Parameters.AddWithValue("@UserNativeLanguage", user.NativeLanguage);
 
                     con.Open();
 
