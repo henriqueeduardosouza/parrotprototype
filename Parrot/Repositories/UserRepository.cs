@@ -34,13 +34,12 @@ public class UserRepository : IUser
     {
         using(SqlConnection con = new SqlConnection(databaseConnection))
         {
-            queryInsert = "INSERT INTO UserList (UserID, UserName, UserPassword, UserEmail) VALUES (@UserID, @UserName, @UserPassword, @UserEmail)";
+            string queryInsert = "INSERT INTO UserList (UserID, UserName, UserPassword, UserEmail) VALUES (@UserID, @UserName, @UserPassword, @UserEmail)";
             
             using (SqlCommand cmd = new(queryInsert, con))
                 {
                     cmd.Parameters.AddWithValue("@UserID", user.Id);
                     cmd.Parameters.AddWithValue("@UserName", user.Name);
-                    cmd.Parameters.AddWithValue("@UserPassword", user.Password);
                     cmd.Parameters.AddWithValue("@UserPassword", user.Password);
                     cmd.Parameters.AddWithValue("@UserEmail", user.Email);
 
