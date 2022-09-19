@@ -18,12 +18,12 @@ public class UserRepository : IUser
             List<User> users = new List<User>();
             while (rdr.Read())
             {
-                User user = new User();
-                user.Id = Guid.Parse(rdr["UserID"].ToString());
-                user.Name = rdr["UserName"].ToString();
-                user.Email = rdr["UserEmail"].ToString();
-                user.Password = rdr["UserPassword"].ToString();
-                users.Add(user);
+                // User user = new User();
+                // user.Id = Guid.Parse(rdr["UserID"].ToString());
+                // user.Name = rdr["UserName"].ToString();
+                // user.Email = rdr["UserEmail"].ToString();
+                // user.Password = rdr["UserPassword"].ToString();
+                // users.Add(user);
             }
             return users;
         }
