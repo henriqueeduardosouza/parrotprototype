@@ -13,16 +13,16 @@ public class UserRepository : IUser
         using (SqlConnection con = new SqlConnection(databaseConnection))
         { 
             con.Open();
-            SqlCommand cmd = new SqlCommand("SELECT * FROM users", con);
+            SqlCommand cmd = new SqlCommand("SELECT * FROM user_list", con);
             SqlDataReader rdr = cmd.ExecuteReader();
             List<User> users = new List<User>();
             while (rdr.Read())
             {
                 User user = new User();
-                user.Id = Guid.Parse(rdr["UserID"].ToString());
-                user.Name = rdr["UserName"].ToString();
-                user.Email = rdr["UserEmail"].ToString();
-                user.Password = rdr["UserPassword"].ToString();
+                user.Id = Guid.Parse(rdr["user_id"].ToString());
+                user.Name = rdr["name"].ToString();
+                user.Email = rdr["email"].ToString();
+                user.Password = rdr["password"].ToString();
                 users.Add(user);
             }
             return users;
@@ -34,14 +34,14 @@ public class UserRepository : IUser
     {
         using(SqlConnection con = new SqlConnection(databaseConnection))
         {
-            string queryInsert = "INSERT INTO UserList (UserID, UserName, UserPassword, UserEmail) VALUES (@UserID, @UserName, @UserPassword, @UserEmail)";
+            string queryInsert = "INSERT INTO user_list (name, email, password, native_language) VALUES (@name, @email, @password, @native_language)";
             
             using (SqlCommand cmd = new(queryInsert, con))
                 {
-                    cmd.Parameters.AddWithValue("@UserID", user.Id);
-                    cmd.Parameters.AddWithValue("@UserName", user.Name);
-                    cmd.Parameters.AddWithValue("@UserPassword", user.Password);
-                    cmd.Parameters.AddWithValue("@UserEmail", user.Email);
+                    cmd.Parameters.AddWithValue("@name", user.Name);
+                    cmd.Parameters.AddWithValue("@email", user.Password);
+                    cmd.Parameters.AddWithValue("@password", user.Email);
+                    cmd.Parameters.AddWithValue("@native_language", user.NativeLanguage);
 
                     con.Open();
 
