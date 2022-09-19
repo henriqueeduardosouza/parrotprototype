@@ -18,12 +18,12 @@ public class UserRepository : IUser
             List<User> users = new List<User>();
             while (rdr.Read())
             {
-                // User user = new User();
-                // user.Id = Guid.Parse(rdr["UserID"].ToString());
-                // user.Name = rdr["UserName"].ToString();
-                // user.Email = rdr["UserEmail"].ToString();
-                // user.Password = rdr["UserPassword"].ToString();
-                // users.Add(user);
+                User user = new User();
+                user.Id = Guid.Parse(rdr["UserID"].ToString());
+                user.Name = rdr["UserName"].ToString();
+                user.Email = rdr["UserEmail"].ToString();
+                user.Password = rdr["UserPassword"].ToString();
+                users.Add(user);
             }
             return users;
         }
@@ -32,7 +32,22 @@ public class UserRepository : IUser
 
     public void CreateUser(User user)
     {
-        throw new NotImplementedException();
+        using(SqlConnection con = new SqlConnection(databaseConnection))
+        {
+            string queryInsert = "INSERT INTO UserList (UserID, UserName, UserPassword, UserEmail) VALUES (@UserID, @UserName, @UserPassword, @UserEmail)";
+            
+            using (SqlCommand cmd = new(queryInsert, con))
+                {
+                    cmd.Parameters.AddWithValue("@UserID", user.Id);
+                    cmd.Parameters.AddWithValue("@UserName", user.Name);
+                    cmd.Parameters.AddWithValue("@UserPassword", user.Password);
+                    cmd.Parameters.AddWithValue("@UserEmail", user.Email);
+
+                    con.Open();
+
+                    cmd.ExecuteNonQuery();
+                }
+        }
     }
 
     public void UpdateUser(User user)
