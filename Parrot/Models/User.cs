@@ -8,12 +8,15 @@ using System.Threading.Tasks;
 namespace Parrot.Models {
     public class User {
         public string Name { get; set; }
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
         public string NativeLanguage { get; set; }
-        public List<string> Friends { get; set; }
-        public User(string name, int id, string nativeLanguage, string email, string password/*, List<string> friends*/) {
+        
+        // public List<string> Friends { get; set; }
+        public User() { }
+
+        public User(string name, Guid id, string nativeLanguage, string email, string password/*, List<string> friends*/) {
             Name = name;
             Id = id;
             Email = email;
@@ -23,7 +26,7 @@ namespace Parrot.Models {
         }
         public void ShowUserInfo(){
             Console.WriteLine($"User id:{Id}\n User name: {Name}\n User email: {Email}\n User password: {Password}\n");
-            Console.WriteLine($"{Friends}");
+        //    Console.WriteLine($"{Friends}");
         }
 
     }
