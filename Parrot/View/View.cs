@@ -9,7 +9,7 @@ namespace Parrot.ViewActivity
 {
     public class View
     {
-       public void ViewUsers(List<User> usersList)
+       public static void ViewUsers(List<User> usersList)
         {
             Console.WriteLine("Lista de usuários: \n");
             foreach (var user in usersList)
