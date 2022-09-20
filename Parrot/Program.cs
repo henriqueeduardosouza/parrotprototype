@@ -60,7 +60,7 @@ namespace MyApp // Note: actual namespace depends on the project name.
                     Console.WriteLine("Type the password: ");
                     string password = Console.ReadLine();
                     User user = new User(username,language,email,password);
-                    users.Add(user);
+                    repo.CreateUser(user);
 
                         Console.WriteLine("\nUsername registered with sucess\n");
                     }
