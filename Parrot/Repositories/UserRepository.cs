@@ -43,7 +43,6 @@ public class UserRepository : IUser
             User user = new User();
             while (rdr.Read())
             {
-                user.Id = Guid.Parse(rdr["user_id"].ToString());
                 user.Name = rdr["name"].ToString();
                 user.Email = rdr["email"].ToString();
                 user.Password = rdr["password"].ToString();

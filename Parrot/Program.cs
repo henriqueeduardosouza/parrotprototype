@@ -15,6 +15,7 @@ namespace MyApp // Note: actual namespace depends on the project name.
             int userId = 0;
             bool logged = false;
             User loggedUser = null;
+            var repo = new UserRepository();
 
             Console.WriteLine("Welcome to Parrot");
             Console.WriteLine("            .------.\r\n" +
@@ -70,12 +71,11 @@ namespace MyApp // Note: actual namespace depends on the project name.
                         Console.WriteLine("Type your password:");
                         string password = Console.ReadLine();
                         //Query usuario
-                        var repo = new UserRepository();
-                        //List<User> users2 = repo.GetUsers();
+                        User user = repo.GetUserByEmail(email);
 
                         //Console.WriteLine(users2[0].Name);
 
-                        if (email == "teste@teste.com" && password == "123")
+                        if (email == user.Email && password == user.Password)
                         {
                             logged = true;
                             Console.WriteLine("\nLogged in successfully\n");
