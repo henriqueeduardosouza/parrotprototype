@@ -29,6 +29,30 @@ public class UserRepository : IUser
         }
         
     }
+    
+    public User GetUserByEmail(string email)
+    {
+        string query = "SELECT * FROM user_list WHERE email = @Email";
+        
+        using (SqlConnection con = new SqlConnection(databaseConnection))
+        {
+            con.Open();
+            SqlCommand cmd = new SqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@Email", email);
+            SqlDataReader rdr = cmd.ExecuteReader();
+            User user = new User();
+            while (rdr.Read())
+            {
+                user.Id = Guid.Parse(rdr["user_id"].ToString());
+                user.Name = rdr["name"].ToString();
+                user.Email = rdr["email"].ToString();
+                user.Password = rdr["password"].ToString();
+                user.NativeLanguage = rdr["native_language"].ToString();
+            }
+            return user;
+        }
+        
+    }
 
     public void CreateUser(User user)
     {
