@@ -2,6 +2,7 @@
 using Parrot.ViewActivity;
 using Parrot.Models;
 using Parrot.Repositories;
+using Newtonsoft.Json;
 
 namespace MyApp // Note: actual namespace depends on the project name.
 {
@@ -101,7 +102,16 @@ namespace MyApp // Note: actual namespace depends on the project name.
                     Console.WriteLine("0 - Exit program");
                     option = Console.ReadLine();
 
-                    if (option == "0")
+                    if (option == "1") 
+                    {
+                        users = repo.GetUsers();
+                        //var jsonString = JsonConvert.SerializeObject(users);
+                        //Console.WriteLine(jsonString);
+                        View.ViewUsers(users);
+
+                    }
+
+                    else if (option == "0")
                     {
                         end = true;
                     }
