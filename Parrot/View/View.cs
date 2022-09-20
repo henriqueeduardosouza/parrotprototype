@@ -14,7 +14,7 @@ namespace Parrot.ViewActivity
             Console.WriteLine("Lista de usuários: \n");
             foreach (var user in usersList)
             {
-                Console.WriteLine($"ID: {user.Id} - Usuário: {user.Name} - Lingua nativa: {user.NativeLanguage} - Email: {user.Email}");
+                Console.WriteLine($"Usuário: {user.Name} - Lingua nativa: {user.NativeLanguage} - Email: {user.Email}");
             }
             return;
         }
