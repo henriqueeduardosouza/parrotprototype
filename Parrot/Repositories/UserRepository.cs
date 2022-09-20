@@ -18,11 +18,11 @@ public class UserRepository : IUser
             List<User> users = new List<User>();
             while (rdr.Read())
             {
-                User user = new User();
-                user.Id = Guid.Parse(rdr["user_id"].ToString());
-                user.Name = rdr["name"].ToString();
-                user.Email = rdr["email"].ToString();
-                user.Password = rdr["password"].ToString();
+                string name = rdr["name"].ToString();
+                string email = rdr["email"].ToString();
+                string password = rdr["password"].ToString();
+                string nativeLanguage = rdr["native_language"].ToString();
+                User user = new User(name, nativeLanguage, email, password);
                 users.Add(user);
             }
             return users;
@@ -43,7 +43,6 @@ public class UserRepository : IUser
             User user = new User();
             while (rdr.Read())
             {
-                user.Id = Guid.Parse(rdr["user_id"].ToString());
                 user.Name = rdr["name"].ToString();
                 user.Email = rdr["email"].ToString();
                 user.Password = rdr["password"].ToString();
