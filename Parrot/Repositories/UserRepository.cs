@@ -39,8 +39,8 @@ public class UserRepository : IUser
             using (SqlCommand cmd = new(queryInsert, con))
                 {
                     cmd.Parameters.AddWithValue("@name", user.Name);
-                    cmd.Parameters.AddWithValue("@email", user.Password);
-                    cmd.Parameters.AddWithValue("@password", user.Email);
+                    cmd.Parameters.AddWithValue("@email", user.Email);
+                    cmd.Parameters.AddWithValue("@password", user.Password);
                     cmd.Parameters.AddWithValue("@native_language", user.NativeLanguage);
 
                     con.Open();
