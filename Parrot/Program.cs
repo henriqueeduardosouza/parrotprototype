@@ -1,6 +1,8 @@
 ﻿using System;
 using Parrot.ViewActivity;
 using Parrot.Models;
+using Parrot.Repositories;
+
 namespace MyApp // Note: actual namespace depends on the project name.
 {
     internal class Program
@@ -68,6 +70,11 @@ namespace MyApp // Note: actual namespace depends on the project name.
                         Console.WriteLine("Type your password:");
                         string password = Console.ReadLine();
                         //Query usuario
+                        var repo = new UserRepository();
+                        //List<User> users2 = repo.GetUsers();
+
+                        //Console.WriteLine(users2[0].Name);
+
                         if (email == "teste@teste.com" && password == "123")
                         {
                             logged = true;
