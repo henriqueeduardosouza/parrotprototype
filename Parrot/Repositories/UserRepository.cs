@@ -54,14 +54,15 @@ public class UserRepository : IUser
     {
         using (SqlConnection con = new(databaseConnection))
         {
-            string queryUpdateBody = "UPDATE users SET UserID = @UserID, UserName = @UserName, UserEmail = @UserEmail, UserPassword = @UserPassword WHERE UserID = @UserID";
+            string queryUpdateBody = "UPDATE user_list SET UserID = @UserID, name = @name, email = @email, password = @password, native_language = @native_language WHERE UserID = @UserID";
 
             using (SqlCommand cmd = new(queryUpdateBody, con))
             {
                 cmd.Parameters.AddWithValue("@UserID", user.Id);
-                cmd.Parameters.AddWithValue("@UserName", user.Name);
-                cmd.Parameters.AddWithValue("@UserEmail", user.NativeLanguage);
-                cmd.Parameters.AddWithValue("@UserPassword", user.Password);
+                cmd.Parameters.AddWithValue("@name", user.Name);
+                cmd.Parameters.AddWithValue("@email", user.Email);
+                cmd.Parameters.AddWithValue("@native_language", user.NativeLanguage);
+                cmd.Parameters.AddWithValue("@password", user.Password);
 
                 con.Open();
 
