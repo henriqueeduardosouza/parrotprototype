@@ -15,16 +15,14 @@ namespace Parrot.Models {
         // public List<string> Friends { get; set; }
         public User() { }
 
-        public User(string name, Guid id, string nativeLanguage, string email, string password/*, List<string> friends*/) {
+        public User(string name, string nativeLanguage, string email, string password/*, List<string> friends*/) {
             Name = name;
             Email = email;
             Password = password;
             NativeLanguage = nativeLanguage;
-            //Friends = friends;
         }
         public void ShowUserInfo(){
             Console.WriteLine($"\n User name: {Name}\n User email: {Email}\n User password: {Password}\n");
-            Console.WriteLine($"{Friends}");
         }
 
     }
