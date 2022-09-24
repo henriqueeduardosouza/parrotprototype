@@ -9,6 +9,10 @@ namespace Parrot.Models
 {
     public class Message
     {
+        public Message()
+        {
+
+        }
         public Message(string sender, string receiver, string text, DateTime date)
         {
             Sender = sender;
