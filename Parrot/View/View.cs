@@ -28,7 +28,6 @@ namespace Parrot.ViewActivity
             {
                 console.writeline(item);
             }
-            return;
         }
     }
 
