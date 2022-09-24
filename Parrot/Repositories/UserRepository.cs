@@ -110,18 +110,18 @@ public class UserRepository : IUser
         }
     }
 
-    public void SendMessage (string sender, string receiver, string text)
+    public void SendMessage (Message message)
     {
         using(SqlConnection con = new SqlConnection(databaseConnection))
         {
-            string queryInsert = "INSERT INTO messages (sender, receiver, message, date) VALUES (@sender, @receiver, @message, @date)";
+            string queryInsert = "INSERT INTO messages (sender, receiver, text, date) VALUES (@sender, @receiver, @text, @date)";
             
             using (SqlCommand cmd = new(queryInsert, con))
                 {
-                    cmd.Parameters.AddWithValue("@sender", sender);
-                    cmd.Parameters.AddWithValue("@receiver", receiver);
-                    cmd.Parameters.AddWithValue("@message", text);
-                    cmd.Parameters.AddWithValue("@date", DateTime.Now.ToString());
+                    cmd.Parameters.AddWithValue("@sender",message.Sender);
+                    cmd.Parameters.AddWithValue("@receiver", message.Receiver);
+                    cmd.Parameters.AddWithValue("@text", message.Text);
+                    cmd.Parameters.AddWithValue("@date", message.Date);
 
                     con.Open();
 

@@ -79,6 +79,7 @@ namespace MyApp // Note: actual namespace depends on the project name.
                         if (email == user.Email && password == user.Password)
                         {
                             logged = true;
+                            loggedUser = user;
                             Console.WriteLine("\nLogged in successfully\n");
                         }
                         else
@@ -99,6 +100,7 @@ namespace MyApp // Note: actual namespace depends on the project name.
                 } else {
                     Console.WriteLine("Type an option:");
                     Console.WriteLine("1 - List registered users");
+                    Console.WriteLine("2 - Send message");
                     Console.WriteLine("0 - Exit program");
                     option = Console.ReadLine();
 
@@ -109,6 +111,16 @@ namespace MyApp // Note: actual namespace depends on the project name.
                         //Console.WriteLine(jsonString);
                         View.ViewUsers(users);
 
+                    }
+                    else if (option == "2")
+                    {
+                        Console.WriteLine("Type the user's email: ");
+                        string receiverEmail = Console.ReadLine();
+                        Console.WriteLine("Type your message: ");
+                        string text = Console.ReadLine();
+
+                        Message message = new Message(loggedUser.Email, receiverEmail, text, DateTime.Now);
+                        repo.SendMessage(message);
                     }
 
                     else if (option == "0")
