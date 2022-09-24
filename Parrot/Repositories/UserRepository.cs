@@ -134,4 +134,28 @@ public class UserRepository : IUser
     {
 
     }
+    
+    
+    public List<User> GetUsersByLanguage(string language)
+    {
+        using (SqlConnection con = new SqlConnection(databaseConnection))
+        { 
+            con.Open();
+            SqlCommand cmd = new SqlCommand("SELECT * FROM user_list WHERE native_language = @language COLLATE SQL_Latin1_General_CP1_CI_AS", con);
+            cmd.Parameters.AddWithValue("@language", language);
+            SqlDataReader rdr = cmd.ExecuteReader();
+            List<User> users = new List<User>();
+            while (rdr.Read())
+            {
+                string name = rdr["name"].ToString();
+                string email = rdr["email"].ToString();
+                string password = rdr["password"].ToString();
+                string nativeLanguage = rdr["native_language"].ToString();
+                User user = new User(name, nativeLanguage, email, password);
+                users.Add(user);
+            }
+            return users;
+        }
+        
+    }
 }
