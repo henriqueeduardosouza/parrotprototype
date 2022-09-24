@@ -6,7 +6,7 @@ namespace Parrot.Repositories;
 
 public class UserRepository : IUser
 {
-    private readonly string databaseConnection =
+    private static readonly string databaseConnection =
         "Server=labsoft.pcs.usp.br;Database=db_5;User Id=usuario_5;Password=44323442882;";
     public List<User> GetUsers()
     {
@@ -110,19 +110,19 @@ public class UserRepository : IUser
         }
     }
 
-    public void SendMessage (string sender, string receiver, string text)
+    public void SendMessage (Message message)
     {
         using(SqlConnection con = new SqlConnection(databaseConnection))
         {
-            string queryInsert = "INSERT INTO messages (sender, receiver, message, date) VALUES (@sender, @receiver, @message, @date)";
+            string queryInsert = "INSERT INTO messages (sender, receiver, text, date) VALUES (@sender, @receiver, @text, @date)";
             
             using (SqlCommand cmd = new(queryInsert, con))
                 {
-                    cmd.Parameters.AddWithValue("@sender", sender);
-                    cmd.Parameters.AddWithValue("@receiver", receiver);
-                    cmd.Parameters.AddWithValue("@message", text);
-                    cmd.Parameters.AddWithValue("@date", DateTime.Now.ToString());
-
+                    cmd.Parameters.AddWithValue("@sender", message.Sender);
+                    cmd.Parameters.AddWithValue("@receiver", message.Receiver);
+                    cmd.Parameters.AddWithValue("@text", message.Text);
+                    cmd.Parameters.AddWithValue("@date", DateTime.Now);
+                    
                     con.Open();
 
                     cmd.ExecuteNonQuery();
@@ -133,7 +133,7 @@ public class UserRepository : IUser
     public static List<string> GetChat (string sender, string receiver)
     {
         List<string> list = new();
-        using (SqlConnection con = new(databaseConnection))
+        using (SqlConnection con = new SqlConnection(databaseConnection))
         {
             string queryFindMessage = "SELECT * FROM MESSAGES WHERE (receiver = @receiver AND sender = @sender) OR (receiver = @sender AND sender = @receiver) ORDER BY id";
 
@@ -143,17 +143,19 @@ public class UserRepository : IUser
 
             using (SqlCommand cmd = new(queryFindMessage, con))
             {
-                
+                cmd.Parameters.AddWithValue("@receiver", receiver);
+                cmd.Parameters.AddWithValue("@sender", sender);
+
                 rdr = cmd.ExecuteReader();
 
                 while (rdr.Read())
                 {
                     Message msg = new()
                     {
-                        msg.Sender = rdr["sender"].ToString(),
-                        msg.Receiver = rdr["receiver"].ToString(),
-                        msg.Text = rdr["text"].ToString(),
-                        msg.Date = rdr["date"].DateTime.Parse(ds)
+                        Sender = rdr["sender"].ToString(),
+                        Receiver = rdr["receiver"].ToString(),
+                        Text = rdr["text"].ToString(),
+                        Date = DateTime.Parse(rdr["date"].ToString())
                     };
 
                     list.Add($"{msg.Date} : {msg.Sender} - {msg.Text}");
@@ -161,6 +163,6 @@ public class UserRepository : IUser
             }
         }
 
-        return list
+        return list;
     }
 }
