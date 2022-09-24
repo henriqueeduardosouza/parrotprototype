@@ -109,4 +109,29 @@ public class UserRepository : IUser
             }
         }
     }
+
+    public void SendMessage (string sender, string receiver, string text)
+    {
+        using(SqlConnection con = new SqlConnection(databaseConnection))
+        {
+            string queryInsert = "INSERT INTO messages (sender, receiver, message, date) VALUES (@sender, @receiver, @message, @date)";
+            
+            using (SqlCommand cmd = new(queryInsert, con))
+                {
+                    cmd.Parameters.AddWithValue("@sender", sender);
+                    cmd.Parameters.AddWithValue("@receiver", receiver);
+                    cmd.Parameters.AddWithValue("@message", text);
+                    cmd.Parameters.AddWithValue("@date", DateTime.Now.ToString());
+
+                    con.Open();
+
+                    cmd.ExecuteNonQuery();
+                }
+        }
+    }
+
+    public void ShowChat (string sender, string receiver)
+    {
+
+    }
 }
