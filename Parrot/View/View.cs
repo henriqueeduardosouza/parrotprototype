@@ -1,4 +1,5 @@
 ﻿using Parrot.Models;
+using Parrot.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,14 +20,15 @@ namespace Parrot.ViewActivity
             return;
         }
 
-        public static void showchat(string sender, string receiver)
+        public static void ShowChat(string sender, string receiver)
         {
-            list<string> chat = new list<string>();
-            chat = getchat(sender, receiver);
-            console.writeline($"conversa entre {sender} e {receiver}: \n");
+            UserRepository userRepository = new();
+            List<string> chat = new List<string>();
+            chat = UserRepository.GetChat(sender, receiver);
+            Console.WriteLine($"conversa entre {sender} e {receiver}: \n");
             foreach (var item in chat)
             {
-                console.writeline(item);
+                Console.WriteLine(item);
             }
         }
     }
