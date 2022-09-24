@@ -19,14 +19,14 @@ namespace Parrot.ViewActivity
             return;
         }
 
-        public static void ShowChat(string sender, string receiver)
+        public static void showchat(string sender, string receiver)
         {
-            List<string> chat = new List<string>();
+            list<string> chat = new list<string>();
             chat = getchat(sender, receiver);
-            Console.WriteLine($"Conversa entre {sender} e {receiver}: \n");
+            console.writeline($"conversa entre {sender} e {receiver}: \n");
             foreach (var item in chat)
             {
-                Console.WriteLine(item);
+                console.writeline(item);
             }
             return;
         }

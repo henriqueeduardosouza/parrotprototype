@@ -116,11 +116,22 @@ namespace MyApp // Note: actual namespace depends on the project name.
                     {
                         Console.WriteLine("Type the user's email: ");
                         string receiverEmail = Console.ReadLine();
-                        Console.WriteLine("Type your message: ");
-                        string text = Console.ReadLine();
-
-                        Message message = new Message(loggedUser.Email, receiverEmail, text, DateTime.Now);
-                        repo.SendMessage(message);
+                        bool stoppedChat = false;
+                        while (!stoppedChat) {
+                            Console.Clear();
+                            Console.WriteLine("You are chatting with " + receiverEmail + ". Type \\q to stop chatting.");
+                            Console.Write("Type your message: ");
+                            string text = Console.ReadLine();
+                            if (text == "\\q")
+                            {
+                                stoppedChat = true;
+                            }
+                            else {
+                                
+                                Message message = new Message(loggedUser.Email, receiverEmail, text, DateTime.Now);
+                                repo.SendMessage(message);
+                            }
+                        }
                     }
 
                     else if (option == "0")
