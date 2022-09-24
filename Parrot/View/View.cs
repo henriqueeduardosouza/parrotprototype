@@ -28,7 +28,6 @@ namespace Parrot.ViewActivity
             {
                 Console.WriteLine(item);
             }
-            return;
         }
     }
 
