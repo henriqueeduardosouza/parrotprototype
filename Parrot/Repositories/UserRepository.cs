@@ -110,18 +110,18 @@ public class UserRepository : IUser
         }
     }
 
-    public void SendMessage (Message message)
+    public void SendMessage (string sender, string receiver, string text)
     {
         using(SqlConnection con = new SqlConnection(databaseConnection))
         {
-            string queryInsert = "INSERT INTO messages (sender, receiver, text, date) VALUES (@sender, @receiver, @text, @date)";
+            string queryInsert = "INSERT INTO messages (sender, receiver, message, date) VALUES (@sender, @receiver, @message, @date)";
             
             using (SqlCommand cmd = new(queryInsert, con))
                 {
-                    cmd.Parameters.AddWithValue("@sender",message.Sender);
-                    cmd.Parameters.AddWithValue("@receiver", message.Receiver);
-                    cmd.Parameters.AddWithValue("@text", message.Text);
-                    cmd.Parameters.AddWithValue("@date", message.Date);
+                    cmd.Parameters.AddWithValue("@sender", sender);
+                    cmd.Parameters.AddWithValue("@receiver", receiver);
+                    cmd.Parameters.AddWithValue("@message", text);
+                    cmd.Parameters.AddWithValue("@date", DateTime.Now.ToString());
 
                     con.Open();
 
@@ -130,8 +130,37 @@ public class UserRepository : IUser
         }
     }
 
-    public void ShowChat (string sender, string receiver)
+    public static List<string> GetChat (string sender, string receiver)
     {
+        List<string> list = new();
+        using (SqlConnection con = new(databaseConnection))
+        {
+            string queryFindMessage = "SELECT * FROM MESSAGES WHERE (receiver = @receiver AND sender = @sender) OR (receiver = @sender AND sender = @receiver) ORDER BY id";
 
+            con.Open();
+
+            SqlDataReader rdr;
+
+            using (SqlCommand cmd = new(queryFindMessage, con))
+            {
+                
+                rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    Message msg = new()
+                    {
+                        msg.Sender = rdr["sender"].ToString(),
+                        msg.Receiver = rdr["receiver"].ToString(),
+                        msg.Text = rdr["text"].ToString(),
+                        msg.Date = rdr["date"].DateTime.Parse(ds)
+                    };
+
+                    list.Add($"{msg.Date} : {msg.Sender} - {msg.Text}");
+                }
+            }
+        }
+
+        return list
     }
 }
