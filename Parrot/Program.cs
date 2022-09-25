@@ -100,8 +100,8 @@ namespace MyApp // Note: actual namespace depends on the project name.
                 } else {
                     Console.WriteLine("Type an option:");
                     Console.WriteLine("1 - List registered users");
-                    Console.WriteLine("2 - Send message");
-                    Console.WriteLine("3 - List registered users by language"); 
+                    Console.WriteLine("2 - List registered users by language"); 
+                    Console.WriteLine("3 - Send message");
                     Console.WriteLine("0 - Exit program");
                     option = Console.ReadLine();
 
@@ -114,6 +114,13 @@ namespace MyApp // Note: actual namespace depends on the project name.
 
                     }
                     else if (option == "2")
+                    {
+                        Console.WriteLine("Type the language: ");
+                        string language = Console.ReadLine();
+                        users = repo.GetUsersByLanguage(language);
+                        View.ViewUsers(users);
+                    }
+                    else if (option == "3")
                     {
                         Console.WriteLine("Type the user's email: ");
                         string receiverEmail = Console.ReadLine();
@@ -133,14 +140,6 @@ namespace MyApp // Note: actual namespace depends on the project name.
                                 repo.SendMessage(message);
                             }
                         }
-                    }
-                    
-                    else if (option == "3")
-                    {
-                        Console.WriteLine("Type the language: ");
-                        string language = Console.ReadLine();
-                        users = repo.GetUsersByLanguage(language);
-                        View.ViewUsers(users);
                     }
 
                     else if (option == "0")
