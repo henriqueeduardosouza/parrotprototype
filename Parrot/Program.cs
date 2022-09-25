@@ -63,7 +63,7 @@ namespace MyApp // Note: actual namespace depends on the project name.
                     User user = new User(username,language,email,password);
                     repo.CreateUser(user);
 
-                        Console.WriteLine("\nUsername registered with sucess\n");
+                        Console.WriteLine("\nUsername registered with success\n");
                     }
                     else if (option == "2") 
                     {
@@ -95,7 +95,7 @@ namespace MyApp // Note: actual namespace depends on the project name.
                     }
 
                     else {
-                        Console.WriteLine("Opção não reconhecida. Tente novamente");
+                        Console.WriteLine("\nInvalid option. Try again.\n");
                     }
                 } else {
                     Console.WriteLine("Type an option:");
@@ -129,7 +129,6 @@ namespace MyApp // Note: actual namespace depends on the project name.
                                 stoppedChat = true;
                             }
                             else {
-                                
                                 Message message = new Message(loggedUser.Email, receiverEmail, text, DateTime.Now);
                                 repo.SendMessage(message);
                             }

@@ -12,11 +12,15 @@ namespace Parrot.ViewActivity
     {
        public static void ViewUsers(List<User> usersList)
         {
-            Console.WriteLine("Lista de usuários: \n");
+            Console.WriteLine("------------------------------------------ Users --------------------------------------------");
+            Console.WriteLine("Name".PadRight(20) + "|".PadRight(5) + "Native language".PadRight(20) + "|".PadRight(5) + "Email".PadRight(20));
+            Console.WriteLine("---------------------------------------------------------------------------------------------");
             foreach (var user in usersList)
             {
-                Console.WriteLine($"Usuário: {user.Name} - Lingua nativa: {user.NativeLanguage} - Email: {user.Email}");
+                Console.WriteLine(user.Name.PadRight(20) + "|".PadRight(5) + user.NativeLanguage.PadRight(20) + "|".PadRight(5) + user.Email.PadRight(20));
             }
+            Console.WriteLine("---------------------------------------------------------------------------------------------\n");
+            
             return;
         }
 
@@ -25,7 +29,7 @@ namespace Parrot.ViewActivity
             UserRepository userRepository = new();
             List<string> chat = new List<string>();
             chat = UserRepository.GetChat(sender, receiver);
-            Console.WriteLine($"conversa entre {sender} e {receiver}: \n");
+            Console.WriteLine($"Chat between {sender} and {receiver}: \n");
             foreach (var item in chat)
             {
                 Console.WriteLine(item);
