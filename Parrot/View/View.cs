@@ -29,7 +29,6 @@ namespace Parrot.ViewActivity
             UserRepository userRepository = new();
             List<string> chat = new List<string>();
             chat = UserRepository.GetChat(sender, receiver);
-            Console.WriteLine($"Chat between {sender} and {receiver}: \n");
             foreach (var item in chat)
             {
                 Console.WriteLine(item);
