@@ -127,7 +127,9 @@ namespace MyApp // Note: actual namespace depends on the project name.
                         bool stoppedChat = false;
                         while (!stoppedChat) {
                             Console.Clear();
-                            Console.WriteLine("You are chatting with " + receiverEmail + ". Type \\q to stop chatting.");
+                            Console.WriteLine("You are chatting with " + receiverEmail + ".");
+                            Console.WriteLine("\t-->Type \\q to stop chatting.");
+                            Console.WriteLine("\t-->Type \\r to refresh the chat.");
                             View.ShowChat(loggedUser.Email, receiverEmail);
                             Console.Write("Type your message: ");
                             string text = Console.ReadLine();
@@ -135,7 +137,7 @@ namespace MyApp // Note: actual namespace depends on the project name.
                             {
                                 stoppedChat = true;
                             }
-                            else {
+                            else if (text != "\\r") {
                                 Message message = new Message(loggedUser.Email, receiverEmail, text, DateTime.Now);
                                 repo.SendMessage(message);
                             }
