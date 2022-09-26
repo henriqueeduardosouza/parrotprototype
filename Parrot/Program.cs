@@ -129,7 +129,7 @@ namespace MyApp // Note: actual namespace depends on the project name.
                             Console.Clear();
                             Console.WriteLine("You are chatting with " + receiverEmail + ".");
                             Console.WriteLine("\t-->Type \\q to stop chatting.");
-                            Console.WriteLine("\t-->Type \\r to refresh the chat.");
+                            Console.WriteLine("\t-->Type \\r to refresh the chat.\n");
                             View.ShowChat(loggedUser.Email, receiverEmail);
                             Console.Write("Type your message: ");
                             string text = Console.ReadLine();
